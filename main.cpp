@@ -58,12 +58,24 @@ Place AddAndReturnPlace (){
     return placeToAdd;
 }
 
+Reservation AddAndReturnReservation(vector<Place> places) {    
+    Place place = choosePlace(places);
+    int type = chooseType();
+    time_t startsAt = chooseDate("Escolha a data de início");
+    time_t endsAt = chooseDate("Escolha a data de término");
+    return Reservation(place, type, startsAt, endsAt);
+}
+
 
 int main() {
 
     vector<Place> systemPlaces;
-    int menu = 0;
     Place placeReturned;
+
+    vector<Reservation> systemReservations;
+    Reservation reservationReturned;
+
+    int menu = 0;    
 
     setlocale(LC_ALL, "pt_BR");
     
@@ -79,7 +91,8 @@ int main() {
                     systemPlaces.push_back(placeReturned);
                 break;
             case 2:
-                // To Do          
+                reservationReturned = AddAndReturnReservation(systemPlaces);
+                systemReservations.push_back(reservationReturned);                
                 break;
             case 3:
                 // To Do

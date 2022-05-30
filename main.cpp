@@ -31,6 +31,18 @@ void printPlaces(vector<Place> systemPlaces){
 
 }
 
+void printReservations(vector<Reservation> systemReservations){
+
+    for (auto i = systemReservations.begin(); i != systemReservations.end(); ++i){
+        Reservation currentReservation = *i;
+        cout << "-----------------------\n";
+        cout << "Nome do Espaço Reservado: " << currentReservation.getPlace().getName() << "\n";
+        cout << "Tipo do Espaço Reservado: " << currentReservation.getPlace().getType() << "\n";
+        cout << "Capacidade do Espaço Reservado: " << currentReservation.getPlace().getCapacity() << "\n";
+    }
+
+}
+
 Place AddAndReturnPlace (){
     int daysToInput;
     int userInput;

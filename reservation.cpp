@@ -20,6 +20,10 @@ Reservation::Reservation(Place place, int type, time_t startsAt, time_t endsAt) 
 }
 
 
+Place Reservation::getPlace() {
+    return this->place;
+}
+
 Place choosePlace(vector<Place> places) {
     
     int selectedPlaceIndex;
@@ -28,7 +32,7 @@ Place choosePlace(vector<Place> places) {
     printf("/=======================\\\n");
     printf("| Escolha um espaço:\n\n");
     for (int i=0; i < places.size(); i++) {
-        printf("| %d. %s\n", i + 1, "Espaco ");
+        printf("| %d. %s\n", i + 1, places.at(i).getName().c_str());
     }
     printf("\\=======================/\n");
     printf("Local Escolhido: ");
@@ -60,10 +64,22 @@ time_t chooseDate(string question) {
 
     cout << endl << question;
     cout << endl << "Data selecionada (dd/MM/yyyy HH:mm): ";
-    cin >> strDate;
-    cout << endl;
-
+    cin.ignore();
+    getline(cin, strDate);
+    
+    struct tm tm;
     time_t t;
+
+    if (strptime(strDate.c_str(), "%d/%m/%Y %H:%M", &tm) == NULL) {
+        cout << "strptime error" << endl;
+    }
+
+    tm.tm_isdst = -1;
+    t = mktime(&tm);
+    if (t == -1) {
+        cout << "mktime error" << endl;
+    }
+
     time(&t);
     return t;
 }

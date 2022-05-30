@@ -107,7 +107,7 @@ int main() {
                 systemReservations.push_back(reservationReturned);                
                 break;
             case 3:
-                // To Do
+                printReservations(systemReservations);
                 break;
             case 4:
                 printPlaces(systemPlaces);
